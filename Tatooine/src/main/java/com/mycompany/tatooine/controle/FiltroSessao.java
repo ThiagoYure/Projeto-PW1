@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ThigoYure
  */
-@WebFilter(urlPatterns = {""})
+@WebFilter(urlPatterns = {"/inicial.jsp"})
 public class FiltroSessao implements Filter {
 
     //private static final String[] URLS_TO_EXCLUDE = {".css", ".js", ".png", ".jpg", ".gif", "index.jsp", "cadastro.jsp", ".html"};
@@ -48,7 +48,7 @@ public class FiltroSessao implements Filter {
             chain.doFilter(httpRequest, httpResponse);
         }*/
         HttpSession session = httpRequest.getSession();
-        if(session.getAttribute("usuario")==null){
+        if(session.getAttribute("user")==null){
             httpResponse.sendRedirect("error2.html");
         }else{
             chain.doFilter(httpRequest, httpResponse);
