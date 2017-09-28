@@ -16,12 +16,12 @@
         <title>Tatooine - Login</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body class="amber lighten-4">
+    <body class="amber lighten-3">
         <div class="row">
-            <img class="responsive-img col s4 offset-s4" style="width: 450px;height: 400px" src="images/Tatooine.png"/> 
+            <div class="center"><img class="responsive-img" style="width: 450px;height: 400px" src="images/Tatooine.png"/></div> 
         </div>
         <div class="row">
-            <div class="card pink darken-3 col s4 offset-s4">
+            <div class="card light-blue accent-2 col s4 offset-s4">
                 <div class="card-content white-text">
                     <h4 class="center-align" style="font-family: fantasy">Login</h4>
                     <form action="frontController" method="POST">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <div class="row center-align">
-                            <input class="pink darken-4 waves-effect waves-light btn" type="submit" value="Entrar">
+                            <input class="light-blue waves-effect waves-light btn" type="submit" value="Entrar">
                         </div>
                         <div class="row center-align">
                             Novo no Tatooine? Crie sua conta <a href="cadastro.jsp">aqui</a>
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="row">
-            <p class="center-align">&copy; 2017 Thiago Yure<p>
+            <p class="center-align white-text">&copy; 2017 Thiago Yure<p>
         </div>
         <script type="text/javascript">
             var url = window.location.search;

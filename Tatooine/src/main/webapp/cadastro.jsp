@@ -16,12 +16,12 @@
         <title>Tatooine - Cadastro</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body class="amber lighten-4">
+    <body class="amber lighten-3">
         <div class="row">
-            <img class="responsive-img col s4 offset-s4" style="width: 450px;height: 400px" src="images/Tatooine.png"/> 
+            <div class="center"><img class="responsive-img" style="width: 450px;height: 400px" src="images/Tatooine.png"/></div> 
         </div>
         <div class="row">
-            <div class="card pink darken-3 col s4 offset-s4">
+            <div class="card light-blue accent-2 col s4 offset-s4">
                 <div class="card-content white-text">
                     <h4 class="center-align" style="font-family: fantasy">Cadastro</h4>
                     <form action="frontController" method="POST" enctype="multipart/form-data">
@@ -58,7 +58,7 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <input name="nascimento" type="text" class="datepicker" required>
-                                <label for="birthdate">Data de nascimento</label>
+                                <label class="white-text" for="birthdate">Data de nascimento</label>
                             </div> 
                         </div>
                         <div class="row">
@@ -67,12 +67,12 @@
                                     <option value="Masculino">Masculino</option>
                                     <option value="Feminino">Feminino</option>
                                 </select>
-                                <label>Sexo</label>
+                                <label class="white-text">Sexo</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="file-field input-field">
-                                <div class="btn">
+                                <div class="btn light-blue">
                                     <span>Foto de Perfil</span>
                                     <input name="fotoPerfil" type="file" id="arquivo">
                                 </div>
@@ -85,7 +85,7 @@
                             <div class="input-field col s12"><input type="hidden" name="controller" value="Cadastro"></div>
                         </div>
                         <div class="row center-align">
-                            <input class="pink darken-4 waves-effect waves-light btn" type="submit" value="Salvar">
+                            <input class="light-blue waves-effect waves-light btn" type="submit" value="Salvar">
                         </div>
                         <div class="row center-align">
                             Já possui conta no Tatooine? Entre com ela <a href="index.jsp">aqui</a>
@@ -95,25 +95,29 @@
             </div>
         </div>
         <div class="row">
-            <p class="center-align">&copy; 2017 Thiago Yure<p>
+            <p class=" white-text center-align">&copy; 2017 Thiago Yure<p>
         </div>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('.datepicker').pickadate({
                     selectMonths: true, // Creates a dropdown to control month
-                    selectYears: 100, // Creates a dropdown of 15 years to control year
-                    min: new Date(1920, 0, 1),
-                    max: new Date()
+                    selectYears: 15,
+                    monthsFull: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+                    monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    weekdaysFull: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
+                    weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                    today: 'Hoje',
+                    clear: 'Limpar',
+                    close: 'Pronto',
+                    labelMonthNext: 'Próximo mês',
+                    labelMonthPrev: 'Mês anterior',
+                    labelMonthSelect: 'Selecione um mês',
+                    labelYearSelect: 'Selecione um ano',
+                    format: 'dd/mm/yyyy'
                 });
                 $('select').material_select();
             });
-            var url = window.location.search;
-            var url1 = url.split("?")[1];
-            var msgError = url1.split("=")[1];
-            if(msgError!==null&&msgError!==""){
-                alert(msgError);
-            }
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>

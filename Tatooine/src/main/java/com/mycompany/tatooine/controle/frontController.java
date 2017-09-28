@@ -85,6 +85,30 @@ public class frontController extends HttpServlet {
                 Logger.getLogger(frontController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        if (controller.equals("sair")) {
+            SairController command = new SairController();
+            try {
+                command.execute(request, response);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(frontController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (controller.equals("cadastroLocal")) {
+            CadastroLocalController command = new CadastroLocalController();
+            try {
+                command.execute(request, response);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(frontController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (controller.equals("cadastroEvento")) {
+            CadastroEventoController command = new CadastroEventoController();
+            try {
+                command.execute(request, response);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(frontController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /**

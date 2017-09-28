@@ -1,10 +1,9 @@
 <%-- 
-    Document   : inicial
-    Created on : 04/09/2017, 10:47:48
+    Document   : pesquisaEvento
+    Created on : 26/09/2017, 23:37:15
     Author     : ThigoYure
 --%>
 
-<%@page import="com.mycompany.tatooine.modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,15 +21,22 @@
             <%@include file="menu.jsp" %>
             <div class="col s9 offset-s3 light-blue accent-3 white-text" style="min-height: 100%;height: auto;position: fixed; background-image: url(images/Tatooine.jpg);background-size: cover">
                 <div class="container">
-                    <div class="row center">
-                        <a href="pesquisaLocal.jsp" class="waves-effect waves-light btn light-blue">Locais</a> 
-                        <a href="pesquisaEvento.jsp" class="waves-effect waves-light btn light-blue">Eventos</a>
-                        <a href="pesquisaUsuario.jsp" class="waves-effect waves-light btn light-blue">Usuários</a>
-                    </div>
+                    </br>
+                    <nav class="amber darken-3">
+                        <div class="nav-wrapper">
+                            <form>
+                                <div class="input-field">
+                                    <input id="search" type="search" required>
+                                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                    <i class="material-icons">close</i>
+                                </div>
+                            </form>
+                        </div>
+                    </nav>
                 </div>
                 </br>
                 <div class="center-align">
-                    <h3>Eventos Compartilhados com você!</h3>
+                    <h3>Resultado da busca!</h3>
                 </div><div class="container"><div class="divider"></div></div>
                 </br>
                 <div class="container">

@@ -1,10 +1,9 @@
 <%-- 
-    Document   : inicial
-    Created on : 04/09/2017, 10:47:48
+    Document   : meusEventos
+    Created on : 26/09/2017, 23:29:00
     Author     : ThigoYure
 --%>
 
-<%@page import="com.mycompany.tatooine.modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,16 +20,9 @@
         <div class="row">
             <%@include file="menu.jsp" %>
             <div class="col s9 offset-s3 light-blue accent-3 white-text" style="min-height: 100%;height: auto;position: fixed; background-image: url(images/Tatooine.jpg);background-size: cover">
-                <div class="container">
-                    <div class="row center">
-                        <a href="pesquisaLocal.jsp" class="waves-effect waves-light btn light-blue">Locais</a> 
-                        <a href="pesquisaEvento.jsp" class="waves-effect waves-light btn light-blue">Eventos</a>
-                        <a href="pesquisaUsuario.jsp" class="waves-effect waves-light btn light-blue">Usuários</a>
-                    </div>
-                </div>
                 </br>
                 <div class="center-align">
-                    <h3>Eventos Compartilhados com você!</h3>
+                    <h3>Meus Eventos</h3>
                 </div><div class="container"><div class="divider"></div></div>
                 </br>
                 <div class="container">
@@ -56,15 +48,16 @@
                                 Detraxit consequat et quo num tendi nada. Paisis, filhis, espiritis santis. </p>
                         </div>
                     </div>
+                    <div class="fixed-action-btn">
+                        <a href="cadastroEvento.jsp" class="btn-floating btn-large amber darken-3">
+                            <i class="large material-icons">add</i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(".button-collapse").sideNav();
-            });
-        </script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <script type="text/javascript">
+            </script>
+            <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
 </html>
