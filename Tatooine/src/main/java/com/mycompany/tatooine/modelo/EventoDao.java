@@ -28,13 +28,14 @@ public class EventoDao {
     public boolean create(Evento novo) throws SQLException, ClassNotFoundException{
         try {
             try (Connection con = ConFactory.getConnection()) {
-                PreparedStatement st = con.prepareStatement("INSERT INTO evento (responsavel, nome, data, hora, descricao)"
-                        + "VALUES(?,?,?,?,?)");
+                PreparedStatement st = con.prepareStatement("INSERT INTO evento (responsavel, nome, data, hora, descricao,local)"
+                        + "VALUES(?,?,?,?,?,?)");
                 st.setString(1, novo.getResponsavel());
                 st.setString(2, novo.getNome());
                 st.setString(3, novo.getData());
                 st.setString(4, novo.getHora());
                 st.setString(5, novo.getDescricao());
+                st.setString(6, novo.getLocal());
                 boolean retorno = st.executeUpdate() > 0;
                 con.close();
                 st.close();

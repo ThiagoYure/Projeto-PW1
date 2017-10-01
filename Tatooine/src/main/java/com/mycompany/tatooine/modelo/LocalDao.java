@@ -27,17 +27,19 @@ public class LocalDao {
     public boolean create(Local novo) throws SQLException, ClassNotFoundException {
         try {
             try (Connection con = ConFactory.getConnection()) {
-                PreparedStatement st = con.prepareStatement("INSERT INTO local (nome,inseridor,tipo,endereco,descricao,foto)"
-                        + "VALUES(?,?,?,?,?,?)");
-                st.setString(1, novo.getNome());
-                st.setString(2, novo.getInseridor());
-                st.setString(3, novo.getTipo());
-                st.setString(4, novo.getEndereco());
-                st.setString(5, novo.getDescricao());
-                st.setString(6, novo.getFoto());
-                boolean retorno = st.executeUpdate() > 0;
-                con.close();
-                st.close();
+                boolean retorno;
+                try (PreparedStatement st = con.prepareStatement("INSERT INTO local (nome,inseridor,tipo,cidade,rua,estado,descricao)"
+                        + "VALUES(?,?,?,?,?,?,?)")) {
+                    st.setString(1, novo.getNome());
+                    st.setString(2, novo.getInseridor());
+                    st.setString(3, novo.getTipo());
+                    st.setString(4, novo.getCidade());
+                    st.setString(5, novo.getRua());
+                    st.setString(6, novo.getEstado());
+                    st.setString(7, novo.getDescricao());
+                    retorno = st.executeUpdate() > 0;
+                    con.close();
+                }
                 return retorno;
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -60,9 +62,10 @@ public class LocalDao {
                     local.setNome(r.getString("nome"));
                     local.setInseridor(r.getString("inseridor"));
                     local.setTipo(r.getString("tipo"));
-                    local.setEndereco(r.getString("endereco"));
+                    local.setRua(r.getString("rua"));
+                    local.setCidade(r.getString("cidade"));
+                    local.setEstado(r.getString("estado"));
                     local.setDescricao(r.getString("descricao"));
-                    local.setFoto(r.getString("foto"));
                     st.close();
                     con.close();
                     return local;
@@ -87,9 +90,11 @@ public class LocalDao {
                     local.setNome(r.getString("nome"));
                     local.setInseridor(r.getString("inseridor"));
                     local.setTipo(r.getString("tipo"));
-                    local.setEndereco(r.getString("endereco"));
+                    local.setRua(r.getString("rua"));
+                    local.setRua(r.getString("cidade"));
+                    local.setRua(r.getString("estado"));
                     local.setDescricao(r.getString("descricao"));
-                    local.setFoto(r.getString("foto"));
+                    retorno.add(local);
                 }
 
                 st.close();
@@ -102,14 +107,13 @@ public class LocalDao {
         return null;
     }
 
-    public boolean delete(String nome) throws SQLException, ClassNotFoundException {
+    public boolean delete(int id) throws SQLException, ClassNotFoundException {
         try {
             try (Connection con = ConFactory.getConnection()) {
 
                 PreparedStatement st = con.prepareStatement(
-                        "DELETE FROM local WHERE nome = ?");
-                st.setString(1, nome);
-
+                        "DELETE FROM local WHERE id = ?");
+                st.setInt(1, id);
                 boolean retorno = st.executeUpdate() > 0;
                 con.close();
                 st.close();
@@ -125,15 +129,16 @@ public class LocalDao {
     public boolean update(Local localNovo, int id) throws ClassNotFoundException, SQLException {
         Connection con = ConFactory.getConnection();
         PreparedStatement st = con.prepareStatement(
-                "UPDATE local SET (nome, descricao, usuario)"
-                + " = (?,?,?,?,?,?) WHERE id = id");
+                "UPDATE local SET (nome, inseridor, tipo,rua,estado,cidade,descricao)"
+                + " = (?,?,?,?,?,?) WHERE id = ?");
         st.setString(1, localNovo.getNome());
         st.setString(2, localNovo.getInseridor());
         st.setString(3, localNovo.getTipo());
-        st.setString(4, localNovo.getEndereco());
-        st.setString(5, localNovo.getDescricao());
-        st.setString(6, localNovo.getFoto());
-
+        st.setString(4, localNovo.getRua());
+        st.setString(5, localNovo.getEstado());
+        st.setString(6, localNovo.getCidade());
+        st.setString(7, localNovo.getDescricao());
+        st.setInt(8, id);
         boolean retorno = st.executeUpdate() > 0;
         con.close();
         return retorno;

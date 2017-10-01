@@ -6,7 +6,9 @@
 package com.mycompany.tatooine.controle;
 
 import com.mycompany.tatooine.interfaces.Command;
+import com.mycompany.tatooine.modelo.Evento;
 import com.mycompany.tatooine.modelo.Usuario;
+import com.mycompany.tatooine.modelo.EventoDao;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
@@ -22,6 +24,7 @@ class CadastroEventoController implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws SQLException, ClassNotFoundException, IOException, ServletException {
+        EventoDao dao = new EventoDao();
         String nome = req.getParameter("nome");
         String descricao = req.getParameter("descricao");
         String local = req.getParameter("local");
@@ -30,8 +33,17 @@ class CadastroEventoController implements Command {
         HttpSession session = req.getSession();
         Usuario user = (Usuario)session.getAttribute("user");
         String responsavel = user.getEmail();
-        if(nome==""){
+        if(nome.equals("")||local.equals("")||descricao.equals("")||data.equals("")||hora.equals("")){
+           res.sendRedirect("cadastroEvento.jsp?messageError=Campos vazios...");
+        }else if(dao.read(nome, responsavel)==null){
+            if(dao.create(new Evento(responsavel,nome,data,hora,descricao,local))){
+                res.sendRedirect("meusEventos.jsp");
+            }else{
+                res.sendRedirect("cadastroEvento.jsp?messageError=Não foi possível cadastrar o evento...");
+            }
             
+        }else{
+            res.sendRedirect("cadastroEvento.jsp?messageError=Você já cadastrou um evento com esse nome...");
         }
     }
     

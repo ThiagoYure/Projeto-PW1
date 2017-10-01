@@ -15,28 +15,22 @@ public class Local {
     private String nome;
     private String inseridor;
     private String tipo;
-    private String endereco;
+    private String cidade;
+    private String rua;
+    private String estado;
     private String descricao;
-    private String foto;
-    
-    public Local(){
+
+    public Local() {
     }
 
-    public Local(String nome, String inseridor, String tipo, String endereco, String descricao, String foto) {
+    public Local(String nome, String inseridor, String tipo, String cidade, String rua, String estado, String descricao) {
         this.nome = nome;
         this.inseridor = inseridor;
         this.tipo = tipo;
-        this.endereco = endereco;
+        this.cidade = cidade;
+        this.rua = rua;
+        this.estado = estado;
         this.descricao = descricao;
-        this.foto = foto;
-    }
-
-    public String getInseridor() {
-        return inseridor;
-    }
-
-    public void setInseridor(String inseridor) {
-        this.inseridor = inseridor;
     }
 
     public String getNome() {
@@ -47,6 +41,14 @@ public class Local {
         this.nome = nome;
     }
 
+    public String getInseridor() {
+        return inseridor;
+    }
+
+    public void setInseridor(String inseridor) {
+        this.inseridor = inseridor;
+    }
+
     public String getTipo() {
         return tipo;
     }
@@ -55,12 +57,28 @@ public class Local {
         this.tipo = tipo;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getDescricao() {
@@ -71,28 +89,16 @@ public class Local {
         this.descricao = descricao;
     }
 
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    @Override
-    public String toString() {
-        return "Local{" + "inseridor=" + inseridor + ", nome=" + nome + ", tipo=" + tipo + ", endereco=" + endereco + ", descricao=" + descricao + ", foto=" + foto + '}';
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.inseridor);
-        hash = 29 * hash + Objects.hashCode(this.nome);
-        hash = 29 * hash + Objects.hashCode(this.tipo);
-        hash = 29 * hash + Objects.hashCode(this.endereco);
-        hash = 29 * hash + Objects.hashCode(this.descricao);
-        hash = 29 * hash + Objects.hashCode(this.foto);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.nome);
+        hash = 59 * hash + Objects.hashCode(this.inseridor);
+        hash = 59 * hash + Objects.hashCode(this.tipo);
+        hash = 59 * hash + Objects.hashCode(this.cidade);
+        hash = 59 * hash + Objects.hashCode(this.rua);
+        hash = 59 * hash + Objects.hashCode(this.estado);
+        hash = 59 * hash + Objects.hashCode(this.descricao);
         return hash;
     }
 
@@ -108,26 +114,36 @@ public class Local {
             return false;
         }
         final Local other = (Local) obj;
-        if (!Objects.equals(this.inseridor, other.inseridor)) {
+        if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
-        if (!Objects.equals(this.nome, other.nome)) {
+        if (!Objects.equals(this.inseridor, other.inseridor)) {
             return false;
         }
         if (!Objects.equals(this.tipo, other.tipo)) {
             return false;
         }
-        if (!Objects.equals(this.endereco, other.endereco)) {
+        if (!Objects.equals(this.cidade, other.cidade)) {
+            return false;
+        }
+        if (!Objects.equals(this.rua, other.rua)) {
+            return false;
+        }
+        if (!Objects.equals(this.estado, other.estado)) {
             return false;
         }
         if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
-        if (!Objects.equals(this.foto, other.foto)) {
-            return false;
-        }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Local{" + "nome=" + nome + ", inseridor=" + inseridor + ", tipo=" + tipo + ", cidade=" + cidade + ", rua=" + rua + ", estado=" + estado + ", descricao=" + descricao + '}';
+    }
+    
+    
     
     
     
