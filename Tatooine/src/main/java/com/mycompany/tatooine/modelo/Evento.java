@@ -5,8 +5,6 @@
  */
 package com.mycompany.tatooine.modelo;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Objects;
 
 /**
@@ -14,6 +12,7 @@ import java.util.Objects;
  * @author Ricarte
  */
 public class Evento {
+    private int id;
     private String responsavel;
     private String nome;
     private String data;
@@ -33,12 +32,12 @@ public class Evento {
     public Evento(){
     }
 
-    public String getLocal() {
-        return local;
+    public int getId() {
+        return id;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getResponsavel() {
@@ -81,15 +80,24 @@ public class Evento {
         this.descricao = descricao;
     }
 
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.responsavel);
-        hash = 37 * hash + Objects.hashCode(this.nome);
-        hash = 37 * hash + Objects.hashCode(this.data);
-        hash = 37 * hash + Objects.hashCode(this.hora);
-        hash = 37 * hash + Objects.hashCode(this.descricao);
-        hash = 37 * hash + Objects.hashCode(this.local);
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.responsavel);
+        hash = 79 * hash + Objects.hashCode(this.nome);
+        hash = 79 * hash + Objects.hashCode(this.data);
+        hash = 79 * hash + Objects.hashCode(this.hora);
+        hash = 79 * hash + Objects.hashCode(this.descricao);
+        hash = 79 * hash + Objects.hashCode(this.local);
         return hash;
     }
 
@@ -105,6 +113,9 @@ public class Evento {
             return false;
         }
         final Evento other = (Evento) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.responsavel, other.responsavel)) {
             return false;
         }
@@ -128,14 +139,6 @@ public class Evento {
 
     @Override
     public String toString() {
-        return "Evento{" + "responsavel=" + responsavel + ", nome=" + nome + ", data=" + data + ", hora=" + hora + ", descricao=" + descricao + ", local=" + local + '}';
+        return "Evento{" + "id=" + id + ", responsavel=" + responsavel + ", nome=" + nome + ", data=" + data + ", hora=" + hora + ", descricao=" + descricao + ", local=" + local + '}';
     }
-
-   
-
-    
-
-    
-    
-    
 }

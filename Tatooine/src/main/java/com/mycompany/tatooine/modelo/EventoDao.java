@@ -58,11 +58,14 @@ public class EventoDao {
                 ResultSet r = st.executeQuery();
                 while (r.next()) {
                     Evento evento = new Evento();
+                    evento.setId(r.getInt("id"));
                     evento.setResponsavel(r.getString("responsavel"));
                     evento.setNome(r.getString("nome"));
                     evento.setData(r.getString("data"));
                     evento.setHora(r.getString("hora"));
                     evento.setDescricao(r.getString("descricao"));
+                    evento.setLocal(r.getString("local"));
+                    retorno.add(evento);
                 }
                 st.close();
                 con.close();
@@ -84,11 +87,40 @@ public class EventoDao {
                 ResultSet r = st.executeQuery();
                 if(r.next()) {
                     Evento evento = new Evento();
+                    evento.setId(r.getInt("id"));
                     evento.setResponsavel(r.getString("responsavel"));
                     evento.setNome(r.getString("nome"));
                     evento.setData(r.getString("data"));
                     evento.setHora(r.getString("hora"));
                     evento.setDescricao(r.getString("descricao"));
+                    evento.setLocal(r.getString("local"));
+                    st.close();
+                    con.close();
+                    return evento;
+                }
+                st.close();
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Evento read(int id) throws SQLException, ClassNotFoundException {
+
+        try {
+            try (Connection con = ConFactory.getConnection()) {
+                PreparedStatement st = con.prepareStatement("SELECT * FROM evento WHERE id=?");
+                st.setInt(1, id);
+                ResultSet r = st.executeQuery();
+                if(r.next()) {
+                    Evento evento = new Evento();
+                    evento.setId(r.getInt("id"));
+                    evento.setResponsavel(r.getString("responsavel"));
+                    evento.setNome(r.getString("nome"));
+                    evento.setData(r.getString("data"));
+                    evento.setHora(r.getString("hora"));
+                    evento.setDescricao(r.getString("descricao"));
+                    evento.setLocal(r.getString("local"));
                     st.close();
                     con.close();
                     return evento;
@@ -101,13 +133,13 @@ public class EventoDao {
         return null;
     }
     
-    public boolean delete(String nome) throws SQLException, ClassNotFoundException {
+    public boolean delete(int id) throws SQLException, ClassNotFoundException {
         try {
             try (Connection con = ConFactory.getConnection()) {
 
                 PreparedStatement st = con.prepareStatement(
-                        "DELETE FROM evento WHERE nome = ?");
-                st.setString(1, nome);
+                        "DELETE FROM evento WHERE id = ?");
+                st.setInt(1, id);
 
                 boolean retorno = st.executeUpdate() > 0;
                 con.close();
@@ -124,7 +156,7 @@ public class EventoDao {
     public boolean update(Evento eventoNovo, int id) throws ClassNotFoundException, SQLException {
         Connection con = ConFactory.getConnection();
         PreparedStatement st = con.prepareStatement(
-                "UPDATE evento SET (nome, descricao, usuario)"
+                "UPDATE evento SET (nome, responsavel, data, hora, descricao)"
                 + " = (?,?,?,?,?) WHERE id = id");
         st.setString(1, eventoNovo.getNome());
         st.setString(2, eventoNovo.getResponsavel());
@@ -136,5 +168,58 @@ public class EventoDao {
         con.close();
         return retorno;
     }
+    public ArrayList<Evento> readEventosGerais(String nome) {
 
+        try {
+            try (Connection con = ConFactory.getConnection()) {
+                PreparedStatement st = con.prepareStatement("SELECT * FROM evento WHERE nome ilike '"+nome+"%'");
+                ResultSet r = st.executeQuery();
+                ArrayList<Evento> resultado = new ArrayList<>();
+                while (r.next()) {
+                    Evento evento = new Evento();
+                    evento.setId(r.getInt("id"));
+                    evento.setResponsavel(r.getString("responsavel"));
+                    evento.setNome(r.getString("nome"));
+                    evento.setData(r.getString("data"));
+                    evento.setHora(r.getString("hora"));
+                    evento.setDescricao(r.getString("descricao"));
+                    evento.setLocal(r.getString("local"));
+                    resultado.add(evento);
+                }
+                con.close();
+                st.close();
+                return resultado;
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ArrayList<Evento> readMeusEventos(String user) {
+
+        try {
+            try (Connection con = ConFactory.getConnection()) {
+                PreparedStatement st = con.prepareStatement("SELECT * FROM evento WHERE responsavel = '"+user+"'");
+                ResultSet r = st.executeQuery();
+                ArrayList<Evento> resultado = new ArrayList<>();
+                while (r.next()) {
+                    Evento evento = new Evento();
+                    evento.setId(r.getInt("id"));
+                    evento.setResponsavel(r.getString("responsavel"));
+                    evento.setNome(r.getString("nome"));
+                    evento.setData(r.getString("data"));
+                    evento.setHora(r.getString("hora"));
+                    evento.setDescricao(r.getString("descricao"));
+                    evento.setLocal(r.getString("local"));
+                    resultado.add(evento);
+                }
+                con.close();
+                st.close();
+                return resultado;
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

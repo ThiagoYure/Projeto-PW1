@@ -3,7 +3,8 @@
     Created on : 26/09/2017, 23:37:15
     Author     : ThigoYure
 --%>
-
+<%@taglib prefix="MyTags" uri="/WEB-INF/tlds/MyTags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,51 +17,58 @@
         <title>Tatooine</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body>
+    <body class="light-blue accent-3">
         <div class="row">
             <%@include file="menu.jsp" %>
-            <div class="col s9 offset-s3 light-blue accent-3 white-text" style="min-height: 100%;height: auto;position: fixed; background-image: url(images/Tatooine.jpg);background-size: cover">
+            <div class="col s9 offset-s3 light-blue accent-3 white-text" style="min-height: 100%;height: auto;position: relative; background-repeat: repeat">
                 <div class="container">
                     </br>
-                    <nav class="amber darken-3">
                         <div class="nav-wrapper">
-                            <form>
+                            <form action="pesquisaEvento.jsp">
                                 <div class="input-field">
-                                    <input id="search" type="search" required>
-                                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                    <i class="material-icons">close</i>
+                                    <input name="nome" id="search" type="search" required>
+                                    <label class="label-icon white-text" for="search"><i class="material-icons">search</i></label>
+                                </div>
+                                <div class="input-field">
+                                    <button id="search" class="right btn waves-effect waves-light amber darken-3" type="submit">Pesquisar</button>
+                                    </br>
                                 </div>
                             </form>
                         </div>
-                    </nav>
                 </div>
+
                 </br>
                 <div class="center-align">
                     <h3>Resultado da busca!</h3>
                 </div><div class="container"><div class="divider"></div></div>
                 </br>
                 <div class="container">
-                    <div class="card  amber darken-3 center-align">
-                        <div class="card-content white-text">
-                            <span class="card-title">Evento 1!</span>
-                            <p>Mussum Ipsum, cacilds vidis litro abertis. Leite de capivaris, leite de mula manquis sem cabeça. 
-                                Suco de cevadiss deixa as pessoas mais interessantis. Não sou faixa preta cumpadi, sou preto inteiris, inteiris. 
-                                Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis.
-
-                                Quem num gosta di mé, boa gentis num é. Casamentiss faiz malandris se pirulitá. 
-                                Detraxit consequat et quo num tendi nada. Paisis, filhis, espiritis santis. </p>
-                        </div>
-                    </div>
-                    <div class="card  amber darken-3 center-align">
-                        <div class="card-content white-text">
-                            <span class="card-title">Evento 2!</span>
-                            <p>Mussum Ipsum, cacilds vidis litro abertis. Leite de capivaris, leite de mula manquis sem cabeça. 
-                                Suco de cevadiss deixa as pessoas mais interessantis. Não sou faixa preta cumpadi, sou preto inteiris, inteiris. 
-                                Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis.
-
-                                Quem num gosta di mé, boa gentis num é. Casamentiss faiz malandris se pirulitá. 
-                                Detraxit consequat et quo num tendi nada. Paisis, filhis, espiritis santis. </p>
-                        </div>
+                    <div>
+                        <ul id="resultado" class="collection">
+                            <MyTags:buscaEventos nome='${param.nome}'/>
+                            <c:choose>
+                                <c:when test='${empty param.nome}'>
+                                    <h5>A busca ainda não foi realizada.</h5>
+                                </c:when>
+                                <c:when test='${empty ListaEventos}'>
+                                    <h5>Não há resultados para essa busca.</h5>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var='eventos' items='${ListaEventos}'>
+                                        <a href='perfilEvento.jsp?idevento=${eventos.id}'>
+                                            <li class='collection-item avatar amber darken-3 white-text'>
+                                                <p> <b>Nome:</b>${eventos.nome}</br>
+                                                    <b>Local:</b> ${eventos.local}</br>
+                                                    <b>Descrição:</b> ${eventos.descricao}</br>
+                                                    <b>Responsável:</b> ${eventos.responsavel}
+                                                </p>
+                                            </li>
+                                        </a>
+                                        <div class="divider"></div>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+                        </ul>
                     </div>
                 </div>
             </div>

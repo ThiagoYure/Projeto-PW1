@@ -16,10 +16,10 @@
         <title>Tatooine</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body>
+    <body class="light-blue accent-3">
         <div class="row">
             <%@include file="menu.jsp" %>
-            <div class="col s9 offset-s3 light-blue white-text" style="min-height: 100%;height: auto;position: absolute; background-image: url(images/Tatooine.jpg);background-size: cover">
+            <div class="col s9 offset-s3 light-blue white-text" style="min-height: 100%;height: auto;position: relative; background-repeat: repeat">
                 </br>
                 <div class="container">
                     <div class="container">

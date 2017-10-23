@@ -59,6 +59,35 @@ public class LocalDao {
                 ResultSet r = st.executeQuery();
                 if(r.next()) {
                     Local local = new Local();
+                    local.setId(r.getInt("id"));
+                    local.setNome(r.getString("nome"));
+                    local.setInseridor(r.getString("inseridor"));
+                    local.setTipo(r.getString("tipo"));
+                    local.setRua(r.getString("rua"));
+                    local.setCidade(r.getString("cidade"));
+                    local.setEstado(r.getString("estado"));
+                    local.setDescricao(r.getString("descricao"));
+                    st.close();
+                    con.close();
+                    return local;
+                }
+                st.close();
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Local read(int id) throws SQLException, ClassNotFoundException {
+
+        try {
+            try (Connection con = ConFactory.getConnection()) {
+                PreparedStatement st = con.prepareStatement("SELECT * FROM local WHERE id=?");
+                st.setInt(1, id);
+                ResultSet r = st.executeQuery();
+                if(r.next()) {
+                    Local local = new Local();
+                    local.setId(r.getInt("id"));
                     local.setNome(r.getString("nome"));
                     local.setInseridor(r.getString("inseridor"));
                     local.setTipo(r.getString("tipo"));
@@ -87,12 +116,12 @@ public class LocalDao {
                 ResultSet r = st.executeQuery();
                 while (r.next()) {
                     Local local = new Local();
-                    local.setNome(r.getString("nome"));
+                    local.setId(r.getInt("id"));
                     local.setInseridor(r.getString("inseridor"));
                     local.setTipo(r.getString("tipo"));
                     local.setRua(r.getString("rua"));
-                    local.setRua(r.getString("cidade"));
-                    local.setRua(r.getString("estado"));
+                    local.setCidade(r.getString("cidade"));
+                    local.setEstado(r.getString("estado"));
                     local.setDescricao(r.getString("descricao"));
                     retorno.add(local);
                 }
@@ -142,5 +171,62 @@ public class LocalDao {
         boolean retorno = st.executeUpdate() > 0;
         con.close();
         return retorno;
+    }
+    
+    public ArrayList<Local> readLocalGerais(String nome) {
+
+        try {
+            try (Connection con = ConFactory.getConnection()) {
+                PreparedStatement st = con.prepareStatement("SELECT * FROM local WHERE nome ilike '"+nome+"%'");
+                ResultSet r = st.executeQuery();
+                ArrayList<Local> resultado = new ArrayList<>();
+                while (r.next()) {
+                    Local local = new Local();
+                    local.setId(r.getInt("id"));
+                    local.setNome(r.getString("nome"));
+                    local.setInseridor(r.getString("inseridor"));
+                    local.setTipo(r.getString("tipo"));
+                    local.setRua(r.getString("rua"));
+                    local.setCidade(r.getString("cidade"));
+                    local.setEstado(r.getString("estado"));
+                    local.setDescricao(r.getString("descricao"));
+                    resultado.add(local);
+                }
+                con.close();
+                st.close();
+                return resultado;
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ArrayList<Local> readMeusLocais(String user) {
+
+        try {
+            try (Connection con = ConFactory.getConnection()) {
+                PreparedStatement st = con.prepareStatement("SELECT * FROM local WHERE inseridor = '"+user+"'");
+                ResultSet r = st.executeQuery();
+                ArrayList<Local> resultado = new ArrayList<>();
+                while (r.next()) {
+                    Local local = new Local();
+                    local.setId(r.getInt("id"));
+                    local.setNome(r.getString("nome"));
+                    local.setInseridor(r.getString("inseridor"));
+                    local.setTipo(r.getString("tipo"));
+                    local.setRua(r.getString("rua"));
+                    local.setCidade(r.getString("cidade"));
+                    local.setEstado(r.getString("estado"));
+                    local.setDescricao(r.getString("descricao"));
+                    resultado.add(local);
+                }
+                con.close();
+                st.close();
+                return resultado;
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

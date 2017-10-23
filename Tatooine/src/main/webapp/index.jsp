@@ -52,12 +52,6 @@
             <p class="center-align white-text">&copy; 2017 Thiago Yure<p>
         </div>
         <script type="text/javascript">
-            var url = window.location.search;
-            var url1 = url.split("?")[1];
-            var msgError = url1.split("=")[1];
-            if(msgError!==null&&msgError!==""){
-                alert(msgError);
-            }
         </script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>

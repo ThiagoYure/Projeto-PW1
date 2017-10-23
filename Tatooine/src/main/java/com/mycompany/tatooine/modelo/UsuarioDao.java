@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -74,6 +75,40 @@ public class UsuarioDao {
                     return user;
                 }
                 st.close();
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param nome
+     * @return
+     */
+    public ArrayList<Usuario> readUsuariosGerais(String nome) {
+
+        try {
+            try (Connection con = ConFactory.getConnection()) {
+                PreparedStatement st = con.prepareStatement("SELECT * FROM usuario WHERE nome ilike '"+nome+"%'");
+                ResultSet r = st.executeQuery();
+                ArrayList<Usuario> resultado = new ArrayList<>();
+                while (r.next()) {
+                    Usuario user = new Usuario();
+                    user.setNome(r.getString("nome"));
+                    user.setEmail(r.getString("email"));
+                    user.setCidade(r.getString("cidade"));
+                    user.setSexo(r.getString("sexo"));
+                    user.setFotoPerfil(r.getString("fotoperfil"));
+                    user.setSenha(r.getString("senha"));
+                    user.setProfissao(r.getString("profissao"));
+                    user.setNascimento(r.getString("datanascimento"));
+                    resultado.add(user);
+                }
+                con.close();
+                st.close();
+                return resultado;
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);

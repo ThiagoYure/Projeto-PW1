@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author Ricarte
  */
 public class Local {
+    private int id;
     private String nome;
     private String inseridor;
     private String tipo;
@@ -31,6 +32,14 @@ public class Local {
         this.rua = rua;
         this.estado = estado;
         this.descricao = descricao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -92,13 +101,14 @@ public class Local {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.nome);
-        hash = 59 * hash + Objects.hashCode(this.inseridor);
-        hash = 59 * hash + Objects.hashCode(this.tipo);
-        hash = 59 * hash + Objects.hashCode(this.cidade);
-        hash = 59 * hash + Objects.hashCode(this.rua);
-        hash = 59 * hash + Objects.hashCode(this.estado);
-        hash = 59 * hash + Objects.hashCode(this.descricao);
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.nome);
+        hash = 97 * hash + Objects.hashCode(this.inseridor);
+        hash = 97 * hash + Objects.hashCode(this.tipo);
+        hash = 97 * hash + Objects.hashCode(this.cidade);
+        hash = 97 * hash + Objects.hashCode(this.rua);
+        hash = 97 * hash + Objects.hashCode(this.estado);
+        hash = 97 * hash + Objects.hashCode(this.descricao);
         return hash;
     }
 
@@ -114,6 +124,9 @@ public class Local {
             return false;
         }
         final Local other = (Local) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
@@ -140,11 +153,6 @@ public class Local {
 
     @Override
     public String toString() {
-        return "Local{" + "nome=" + nome + ", inseridor=" + inseridor + ", tipo=" + tipo + ", cidade=" + cidade + ", rua=" + rua + ", estado=" + estado + ", descricao=" + descricao + '}';
-    }
-    
-    
-    
-    
-    
+        return "Local{" + "id=" + id + ", nome=" + nome + ", inseridor=" + inseridor + ", tipo=" + tipo + ", cidade=" + cidade + ", rua=" + rua + ", estado=" + estado + ", descricao=" + descricao + '}';
+    }    
 }

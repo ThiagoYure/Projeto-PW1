@@ -3,7 +3,8 @@
     Created on : 26/09/2017, 23:03:26
     Author     : ThigoYure
 --%>
-
+<%@taglib prefix="MyTags" uri="/WEB-INF/tlds/MyTags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,37 +17,41 @@
         <title>Tatooine</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body>
+    <body class="light-blue accent-3">
         <div class="row">
             <%@include file="menu.jsp" %>
-            <div class="col s9 offset-s3 light-blue accent-3 white-text" style="min-height: 100%;height: auto;position: fixed; background-image: url(images/Tatooine.jpg);background-size: cover">
+            <div class="col s9 offset-s3 light-blue accent-3 white-text" style="min-height: 100%;height: auto;position: relative; background-repeat: repeat">
                 </br>
                 <div class="center-align">
                     <h3>Meus Locais</h3>
                 </div><div class="container"><div class="divider"></div></div>
                 </br>
                 <div class="container">
-                    <div class="card  amber darken-3 center-align">
-                        <div class="card-content white-text">
-                            <span class="card-title">Local 1!</span>
-                            <p>Mussum Ipsum, cacilds vidis litro abertis. Leite de capivaris, leite de mula manquis sem cabeça. 
-                                Suco de cevadiss deixa as pessoas mais interessantis. Não sou faixa preta cumpadi, sou preto inteiris, inteiris. 
-                                Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis.
-
-                                Quem num gosta di mé, boa gentis num é. Casamentiss faiz malandris se pirulitá. 
-                                Detraxit consequat et quo num tendi nada. Paisis, filhis, espiritis santis. </p>
-                        </div>
-                    </div>
-                    <div class="card  amber darken-3 center-align">
-                        <div class="card-content white-text">
-                            <span class="card-title">Local 2!</span>
-                            <p>Mussum Ipsum, cacilds vidis litro abertis. Leite de capivaris, leite de mula manquis sem cabeça. 
-                                Suco de cevadiss deixa as pessoas mais interessantis. Não sou faixa preta cumpadi, sou preto inteiris, inteiris. 
-                                Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis.
-
-                                Quem num gosta di mé, boa gentis num é. Casamentiss faiz malandris se pirulitá. 
-                                Detraxit consequat et quo num tendi nada. Paisis, filhis, espiritis santis. </p>
-                        </div>
+                    <div>
+                        <ul id="resultado" class="collection">
+                            <MyTags:buscaMeusLocais user='${user.email}'/>
+                            <c:choose>
+                                <c:when test='${empty ListaLocais}'>
+                                    <h5>Não há locais cadastrados por você ainda.</h5>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var='locais' items='${ListaLocais}'>
+                                        <a href='perfilLocal.jsp?idlocal=${locais.id}'>
+                                            <li class='collection-item avatar amber darken-3 white-text'>
+                                                <p> <b>Nome:</b>${locais.nome}</br>
+                                                    <b>Rua:</b> ${locais.rua}</br>
+                                                    <b>Cidade:</b> ${locais.cidade}</br>
+                                                    <b>Estado:</b> ${locais.estado}</br>
+                                                    <b>Resumo:</b> ${locais.descricao}</br>
+                                                    <b>Tipo:</b> ${locais.tipo}
+                                                </p>
+                                            </li>
+                                        </a>
+                                        <div class="divider"></div>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+                        </ul>
                     </div>
                     <div class="fixed-action-btn">
                         <a href="cadastroLocal.jsp" class="btn-floating btn-large amber darken-3 modal-trigger">

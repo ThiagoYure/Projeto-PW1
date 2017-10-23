@@ -3,8 +3,6 @@
     Created on : 04/09/2017, 10:47:48
     Author     : ThigoYure
 --%>
-
-<%@page import="com.mycompany.tatooine.modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,10 +15,10 @@
         <title>Tatooine</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body>
+    <body class="light-blue accent-3">
         <div class="row">
             <%@include file="menu.jsp" %>
-            <div class="col s9 offset-s3 light-blue accent-3 white-text" style="min-height: 100%;height: auto;position: fixed; background-image: url(images/Tatooine.jpg);background-size: cover">
+            <div class="col s9 offset-s3 light-blue accent-3 white-text" style="min-height: 100%;height: auto;position: relative; background-repeat: repeat">
                 <div class="container">
                     <div class="row center">
                         <a href="pesquisaLocal.jsp" class="waves-effect waves-light btn light-blue">Locais</a> 
